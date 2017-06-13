@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="row">
+            <div class="col-md-12 text-center">
+                <h1>Weather app</h1>
+                <form action="#" id="getWeatherForm">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="city" placeholder="Enter city" required value="tel aviv">
+                        <small id="emailHelp" class="form-text text-muted">Serving wather since 1981</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </header>
+        <div class="row results">
+        </div>
+    </div>
+    <script src="jquery/dist/jquery.min.js"></script>
+    <script src="handlebars/dist/handlebars.js"></script>
+    <script id="result-template" type="text/x-handlebars-template">
+        <div class="col-md-12 weatherItem">
+            <h3>{{observationpoint}} - {{skytext}} - {{temperature}} | f <img src="{{imageUrl}}" alt=""></h3>
+            <ul class="comment">
+                {{#each comments}}
+                <li>{{comment}}</li>
+                {{/each}}
+            </ul>
+            <hr>
+            <form action="#" class="comment_form">
+                <div class="form-group">
+                    <input type="text" class="form-control" class="commentInp" placeholder="Enter comment" required>
+                </div>
+                <button type="submit" class="btn btn-primary commentSend">Submit</button>
+            </form>
+            
+        </div>
+    </script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
