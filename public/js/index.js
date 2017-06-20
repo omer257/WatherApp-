@@ -1,7 +1,5 @@
 /*jshint esnext: true */
 class BooksearchClass {
-
-
     constructor(cont, tempElem) {
         this.results = JSON.parse(localStorage.getItem("results")) || [];
         this.resultsContainer = cont;
@@ -19,7 +17,6 @@ class BooksearchClass {
             return itemX.city === parseData.observationpoint;
         });
         if (foundIndex === -1) {
-
             this.results.push({
                 city: parseData.observationpoint,
                 skytext: parseData.skytext,
@@ -29,6 +26,7 @@ class BooksearchClass {
                 comments: []
             });
         }
+        this.saveToDb();
         this.renderReults();
     }
     getData() {
@@ -42,8 +40,7 @@ class BooksearchClass {
                 that.handleRes(data);
             },
             error: function (data) {
-                console.log('bad');
-                console.log(data);
+                that.handleRes(data);
             }
         });
     }
@@ -54,14 +51,35 @@ class BooksearchClass {
         this.results[htmlthis.parents('.weatherItem').index()].comments.push({
             comment: inputData
         });
+        this.saveToDb();
         this.renderReults();
 
+    }
+
+    removeRes(str) {
+        this.results.splice(str.parents('.weatherItem').index(), 1);
+        this.saveToDb();
+        this.renderReults();
+    }
+    removeComment(str) {
+        this.results[str.parents('.weatherItem').index()].comments.splice(str.parents('li').index(), 1);
+        this.saveToDb();
+        this.renderReults();
+    }
+
+    saveToDb() {
+        //        localStorage.setItem("results", JSON.stringify(this.results));
+        $.post( "api", JSON.stringify(this.results) );
+        
     }
 
     renderReults() {
         this.resultsContainer.empty();
         let that = this;
-        this.results.forEach(function (item) {
+        var results = this.results.sort((a, b) => {
+            return a.temperature - b.temperature;
+        });
+        results.forEach((item) => {
             let newHTML = that.template({
                 skytext: item.skytext,
                 temperature: item.temperature,
@@ -71,13 +89,18 @@ class BooksearchClass {
             });
             that.resultsContainer.append(newHTML);
         });
-        localStorage.setItem("results", JSON.stringify(this.results));
     }
-    
+
 }
 
 let myWeatherInst = new BooksearchClass($('.results'), $('#result-template'));
 $("#getWeatherForm").submit(() => myWeatherInst.getData());
 $('body').on('click', '.commentSend', function () {
     myWeatherInst.getCommentForm($(this));
+});
+$('body').on('click', '.delete_weather', function () {
+    myWeatherInst.removeRes($(this));
+});
+$('body').on('click', '.deletecomment', function () {
+    myWeatherInst.removeComment($(this));
 });

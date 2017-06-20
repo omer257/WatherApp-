@@ -1,0 +1,38 @@
+html
+  head
+    meta(charset='UTF-8')
+    title Document
+    link(rel='stylesheet', type='text/css', href='bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', type='text/css', href='css/style.css')
+  body
+    .container
+      header.row
+        .col-md-12.text-center
+          h1 Weather app 
+          form#getWeatherForm(action='#')
+            .form-group
+              input#city.form-control(type='text', placeholder='Enter city', required='', value='tel aviv')
+              small#emailHelp.form-text.text-muted Serving wather since 1981
+            button.btn.btn-primary(type='submit') Submit
+      .row.results
+    script(src='jquery/dist/jquery.min.js')
+    script(src='handlebars/dist/handlebars.js')
+    script#result-template(type='text/x-handlebars-template').
+      <div class="col-md-12 weatherItem">
+      <div class="pull-right delete_weather">X</div>
+      <h3>{{observationpoint}} - {{skytext}} - {{temperature}} | f <img src="{{imageUrl}}" alt=""></h3>
+      <ul class="comment">
+      {{#each comments}}
+      <li>{{comment}} <span class="pull-right deletecomment">X</span></li>
+      {{/each}}
+      </ul>
+      <hr>
+      <form action="#" class="comment_form">
+      <div class="form-group">
+      <input type="text" class="form-control" class="commentInp" placeholder="Enter comment" required>
+      </div>
+      <button type="submit" class="btn btn-primary commentSend">Submit</button>
+      </form>
+      </div>
+    script(src='js/index.js')

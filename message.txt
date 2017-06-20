@@ -1,0 +1,1 @@
+"{\"[{\\\"city\\\":\\\"Tel Aviv-Yafo, Israel\\\",\\\"skytext\\\":\\\"Mostly Sunny\\\",\\\"temperature\\\":\\\"82\\\",\\\"imageUrl\\\":\\\"http://blob.weather.microsoft.com/static/weather4/en-us/law/34.gif\\\",\\\"observationpoint\\\":\\\"Tel Aviv-Yafo, Israel\\\",\\\"comments\\\":\":[\"\"]}"

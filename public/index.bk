@@ -29,6 +29,7 @@
     <script src="handlebars/dist/handlebars.js"></script>
     <script id="result-template" type="text/x-handlebars-template">
         <div class="col-md-12 weatherItem">
+           <div class="pull-right delete_weather">X</div>
             <h3>{{observationpoint}} - {{skytext}} - {{temperature}} | f <img src="{{imageUrl}}" alt=""></h3>
             <ul class="comment">
                 {{#each comments}}
